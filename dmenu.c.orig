@@ -696,6 +696,8 @@ setup(void)
 		if (!XGetWindowAttributes(dpy, parentwin, &wa))
 			die("could not get embedding window attributes: 0x%lx",
 			    parentwin);
+<<<<<<< HEAD
+
 
 		if (centered) {
 			mw = MIN(MAX(max_textw() + promptw, min_width), wa.width);
@@ -708,7 +710,32 @@ setup(void)
 		}
 
     }
+	for (item = items; item && item->text; ++item) {
+		if ((tmp = textw_clamp(item->text, mw/3)) > inputw) {
+			if ((inputw = tmp) == mw/3)
+				break;
+		}
+	}
+||||||| 33685b0
+		x = 0;
+		y = topbar ? 0 : wa.height - mh;
+		mw = wa.width;
+	}
+	promptw = (prompt && *prompt) ? TEXTW(prompt) - lrpad / 4 : 0;
+	for (item = items; item && item->text; ++item) {
+		if ((tmp = textw_clamp(item->text, mw/3)) > inputw) {
+			if ((inputw = tmp) == mw/3)
+				break;
+		}
+	}
+=======
+		x = 0;
+		y = topbar ? 0 : wa.height - mh;
+		mw = wa.width;
+	}
+	promptw = (prompt && *prompt) ? TEXTW(prompt) - lrpad / 4 : 0;
 	inputw = mw / 3; /* input width: ~33% of monitor width */
+>>>>>>> upstream/master
 	match();
 
 	/* create menu window */
